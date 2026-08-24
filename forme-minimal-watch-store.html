@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Minimalist watch e-commerce portfolio website">
+<title>FORME — Minimal Watch Store</title>
+
+<style>
+:root{
+  --bg:#fafafa;
+  --surface:#f1f1ef;
+  --text:#151515;
+  --muted:#777;
+  --border:#e4e4e1;
+  --accent:#b18a5a;
+  --max:1200px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.5;
+}
+
+img{max-width:100%;display:block}
+
+a{text-decoration:none;color:inherit}
+
+button{
+  font:inherit;
+  cursor:pointer;
+}
+
+.container{
+  width:min(92%,var(--max));
+  margin:auto;
+}
+
+/* NAVIGATION */
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(250,250,250,.94);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+
+.nav{
+  min-height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.logo{
+  font-size:1.05rem;
+  font-weight:700;
+  letter-spacing:.18em;
+}
+
+.nav-links{
+  display:flex;
+  gap:28px;
+  font-size:.85rem;
+}
+
+.nav-links a:hover{
+  color:var(--accent);
+}
+
+.cart-button{
+  border:1px solid var(--border);
+  background:white;
+  padding:9px 13px;
+  border-radius:6px;
+}
+
+.cart-number{
+  margin-left:5px;
+  font-size:.75rem;
+  font-weight:700;
+}
+
+/* HERO */
+.hero{
+  min-height:calc(100vh - 68px);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:70px;
+  padding:70px 0;
+}
+
+.label{
+  font-size:.7rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--accent);
+  font-weight:700;
+  margin-bottom:18px;
+}
+
+.hero h1{
+  font-family:Georgia,serif;
+  font-weight:400;
+  font-size:clamp(3rem,7vw,6rem);
+  line-height:.9;
+  letter-spacing:-.05em;
+}
+
+.hero-text p{
+  max-width:470px;
+  color:var(--muted);
+  margin:25px 0 30px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--text);
+  color:white;
+  padding:13px 20px;
+  border:1px solid var(--text);
+  border-radius:5px;
+  font-size:.8rem;
+  font-weight:700;
+}
+
+.btn:hover{
+  background:#333;
+}
+
+.hero-watch{
+  min-height:500px;
+  background:var(--surface);
+  display:grid;
+  place-items:center;
+}
+
+/* SIMPLE CSS WATCH */
+.watch{
+  width:190px;
+  height:300px;
+  position:relative;
+}
+
+.watch-strap{
+  position:absolute;
+  left:55px;
+  width:80px;
+  height:300px;
+  background:#202020;
+  border-radius:22px;
+}
+
+.watch-case{
+  position:absolute;
+  left:15px;
+  top:58px;
+  width:160px;
+  height:160px;
+  padding:9px;
+  border-radius:50%;
+  background:linear-gradient(145deg,#ddd,#777,#ddd);
+}
+
+.watch-face{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  background:#111;
+  position:relative;
+}
+
+.watch-face:after{
+  content:"FORME";
+  position:absolute;
+  top:43px;
+  left:0;
+  width:100%;
+  text-align:center;
+  color:#ddd;
+  font:700 8px Georgia,serif;
+  letter-spacing:.15em;
+}
+
+.hand{
+  position:absolute;
+  left:50%;
+  bottom:50%;
+  width:3px;
+  background:white;
+  border-radius:5px;
+  transform-origin:bottom;
+}
+
+.hour{
+  height:45px;
+  transform:rotate(35deg);
+}
+
+.minute{
+  height:62px;
+  width:2px;
+  transform:rotate(125deg);
+}
+
+.dot{
+  position:absolute;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--accent);
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+}
+
+/* SECTIONS */
+.section{
+  padding:90px 0;
+}
+
+.section-heading{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:30px;
+  margin-bottom:35px;
+}
+
+.section-heading h2{
+  font-family:Georgia,serif;
+  font-weight:400;
+  font-size:clamp(2rem,4vw,3rem);
+}
+
+.section-heading p{
+  max-width:420px;
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+/* 3-GRID PRODUCT SYSTEM */
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+
+.product{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:6px;
+  overflow:hidden;
+}
+
+.product-image{
+  aspect-ratio:1 / 1;
+  background:var(--surface);
+  display:grid;
+  place-items:center;
+}
+
+.product-watch{
+  width:115px;
+  height:190px;
+  position:relative;
+}
+
+.product-watch .watch-strap{
+  left:35px;
+  width:46px;
+  height:190px;
+  border-radius:14px;
+}
+
+.product-watch .watch-case{
+  left:8px;
+  top:37px;
+  width:100px;
+  height:100px;
+  padding:6px;
+}
+
+.product-watch .watch-face:after{
+  font-size:5px;
+  top:27px;
+}
+
+.product-watch .hour{
+  height:28px;
+  width:2px;
+}
+
+.product-watch .minute{
+  height:39px;
+  width:2px;
+}
+
+.product-watch .dot{
+  width:6px;
+  height:6px;
+}
+
+.product-content{
+  padding:18px;
+}
+
+.product-content h3{
+  font-size:.95rem;
+  margin-bottom:5px;
+}
+
+.product-meta{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  color:var(--muted);
+  font-size:.78rem;
+}
+
+.product-meta strong{
+  color:var(--text);
+}
+
+.add-cart{
+  width:100%;
+  margin-top:16px;
+  padding:10px;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:4px;
+  font-size:.78rem;
+  font-weight:700;
+}
+
+.add-cart:hover{
+  background:var(--text);
+  color:white;
+  border-color:var(--text);
+}
+
+/* BRAND SECTION */
+.about{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:70px;
+  align-items:center;
+}
+
+.about-image{
+  min-height:400px;
+  background:#202020;
+  display:grid;
+  place-items:center;
+  color:white;
+  font:400 5rem Georgia,serif;
+}
+
+.about-copy h2{
+  font:400 clamp(2rem,4vw,3.2rem) Georgia,serif;
+  line-height:1.05;
+  margin-bottom:22px;
+}
+
+.about-copy p{
+  color:var(--muted);
+  margin-bottom:15px;
+}
+
+/* FEATURES — ALSO 3 GRID */
+.feature-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+
+.feature{
+  border-top:1px solid var(--border);
+  padding-top:18px;
+}
+
+.feature strong{
+  display:block;
+  font-size:.9rem;
+  margin-bottom:7px;
+}
+
+.feature span{
+  color:var(--muted);
+  font-size:.8rem;
+}
+
+/* FOOTER */
+footer{
+  background:#151515;
+  color:white;
+  padding:55px 0 25px;
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:40px;
+}
+
+footer .logo{
+  margin-bottom:12px;
+}
+
+footer p,footer a{
+  color:#999;
+  font-size:.8rem;
+}
+
+footer h4{
+  font-size:.8rem;
+  margin-bottom:12px;
+}
+
+.copyright{
+  border-top:1px solid #333;
+  margin-top:45px;
+  padding-top:18px;
+  color:#666;
+  font-size:.7rem;
+}
+
+/* CART */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:200;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.cart{
+  background:white;
+  width:min(440px,100%);
+  max-height:90vh;
+  overflow:auto;
+  border-radius:7px;
+  padding:25px;
+  position:relative;
+}
+
+.close{
+  position:absolute;
+  top:12px;
+  right:15px;
+  border:0;
+  background:none;
+  font-size:1.5rem;
+}
+
+.cart h2{
+  font:400 2rem Georgia,serif;
+  margin-bottom:20px;
+}
+
+.cart-item{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:13px 0;
+  border-bottom:1px solid var(--border);
+  font-size:.8rem;
+}
+
+.cart-item button{
+  border:0;
+  background:none;
+  color:#999;
+}
+
+.cart-total{
+  display:flex;
+  justify-content:space-between;
+  font-weight:700;
+  margin:22px 0;
+}
+
+.empty{
+  color:var(--muted);
+  text-align:center;
+  padding:30px 0;
+  font-size:.85rem;
+}
+
+/* TABLET */
+@media(max-width:900px){
+  .hero{
+    grid-template-columns:1fr;
+    gap:40px;
+    min-height:auto;
+  }
+
+  .hero-watch{
+    min-height:430px;
+  }
+
+  .about{
+    grid-template-columns:1fr;
+    gap:35px;
+  }
+
+  .footer-grid{
+    grid-template-columns:1.5fr 1fr 1fr;
+  }
+}
+
+/* MOBILE */
+@media(max-width:650px){
+  .container{
+    width:min(92%,540px);
+  }
+
+  .nav{
+    min-height:60px;
+  }
+
+  .nav-links{
+    display:none;
+  }
+
+  .hero{
+    padding:55px 0;
+  }
+
+  .hero h1{
+    font-size:clamp(3.2rem,18vw,5rem);
+  }
+
+  .hero-watch{
+    min-height:350px;
+  }
+
+  .section{
+    padding:65px 0;
+  }
+
+  .section-heading{
+    display:block;
+  }
+
+  .section-heading p{
+    margin-top:12px;
+  }
+
+  /*
+    PRODUCT GRID:
+    3 columns on desktop
+    2 columns on small tablets/large phones
+    1 column on narrow phones
+  */
+  .product-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
+
+  .product-content{
+    padding:13px;
+  }
+
+  .product-content h3{
+    font-size:.85rem;
+  }
+
+  .product-meta{
+    display:block;
+  }
+
+  .product-meta strong{
+    display:block;
+    margin-top:3px;
+  }
+
+  .add-cart{
+    margin-top:12px;
+    padding:9px 5px;
+    font-size:.7rem;
+  }
+
+  .feature-grid{
+    grid-template-columns:1fr;
+    gap:28px;
+  }
+
+  .about-image{
+    min-height:280px;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+  }
+
+  .footer-grid > div:first-child{
+    grid-column:1 / -1;
+  }
+}
+
+/* VERY SMALL PHONES */
+@media(max-width:390px){
+  .product-grid{
+    grid-template-columns:1fr;
+  }
+
+  .product-image{
+    aspect-ratio:1.15 / 1;
+  }
+
+  .hero-watch{
+    min-height:300px;
+  }
+
+  .watch{
+    transform:scale(.82);
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr;
+  }
+
+  .footer-grid > div:first-child{
+    grid-column:auto;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="#" class="logo">FORME</a>
+
+    <nav class="nav-links">
+      <a href="#watches">Watches</a>
+      <a href="#about">About</a>
+      <a href="#service">Service</a>
+    </nav>
+
+    <button class="cart-button" id="openCart">
+      Bag <span class="cart-number" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="container hero">
+    <div class="hero-text">
+      <div class="label">Essential timepieces</div>
+      <h1>Less.<br>But better.</h1>
+      <p>
+        Minimal watches designed for everyday life.
+        Clean proportions, quiet details, and timeless materials.
+      </p>
+      <a href="#watches" class="btn">View collection</a>
+    </div>
+
+    <div class="hero-watch">
+      <div class="watch">
+        <div class="watch-strap"></div>
+        <div class="watch-case">
+          <div class="watch-face">
+            <div class="hand hour"></div>
+            <div class="hand minute"></div>
+            <div class="dot"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- PRODUCTS -->
+  <section class="container section" id="watches">
+
+    <div class="section-heading">
+      <div>
+        <div class="label">Collection</div>
+        <h2>Nine essentials.</h2>
+      </div>
+
+      <p>
+        A focused collection of nine watches built around
+        simple forms and everyday versatility.
+      </p>
+    </div>
+
+    <!-- 3 GRID -->
+    <div class="product-grid">
+
+      <article class="product">
+        <div class="product-image">
+          <div class="product-watch">
+            <div class="watch-strap"></div>
+            <div class="watch-case">
+              <div class="watch-face">
+                <div class="hand hour"></div>
+                <div class="hand minute"></div>
+                <div class="dot"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-content">
+          <h3>Mono 01</h3>
+          <div class="product-meta">
+            <span>Steel · Automatic</span>
+            <strong>₱18,900</strong>
+          </div>
+          <button class="add-cart" data-name="Mono 01" data-price="18900">
+            Add to bag
+          </button>
+        </div>
+      </article>
+
+
+      <article class="product">
+        <div class="product-image">
+          <div class="product-watch">
+            <div class="watch-strap" style="background:#744a2e"></div>
+            <div class="watch-case">
+              <div class="watch-face" style="background:#e5e0d4">
+                <div class="hand hour" style="background:#222"></div>
+                <div class="hand minute" style="background:#222"></div>
+                <div class="dot"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-content">
+          <h3>Form 02</h3>
+          <div class="product-meta">
+            <span>Leather · Automatic</span>
+            <strong>₱22,500</strong>
+          </div>
+          <button class="add-cart" data-name="Form 02" data-price="22500">
+            Add to bag
+          </button>
+        </div>
+      </article>
+
+
+      <article class="product">
+        <div class="product-image">
+          <div class="product-watch">
+            <div class="watch-strap" style="background:#aaa"></div>
+            <div class="watch-case">
+              <div class="watch-face" style="background:#30393b">
+                <div class="hand hour"></div>
+                <div class="hand minute"></div>
+                <div class="dot"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-content">
+          <h3>Line 03</h3>
+          <div class="product-meta">
+            <span>Titanium · Quartz</span>
+            <strong>₱15,800</strong>
+          </div>
+          <button class="add-cart" data-name="Line 03" data-price="15800">
+            Add to bag
+          </button>
+        </div>
+      </article>
+
+
+      <article class="product">
+        <div class="product-image">
+          <div class="product-watch">
+            <div class="watch-strap" style="background:#c9b18d"></div>
+            <div class="watch-case">
+              <div class="watch-face" style="background:#f0ede5">
+                <div class="hand hour" style="background:#222"></div>
+                <div class="hand minute" style="background:#222"></div>
+                <div class="dot"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="product-content">
+          <h3>Arc 04</h3>
+          <div class="product-meta">
+            <span>Leather · Quartz</span>
+            <strong>₱13,900</strong>
+          </div>
+          <button class="add-cart" data-name="Arc 04" data-price="13900">Add to bag</button>
+        </div>
+      </article>
+
+
+      <article class="product">
+        <div class="product-image">
+          <div class="product-watch">
+            <div class="watch-strap" style="background:#373737"></div>
+            <div class="watch-case">
+              <div class="watch-face" style="background:#182126">
+                <div class="hand hour"></div>
+                <div class="hand minute"></div>
+                <div class="dot"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="product-content">
+          <h3>Core 05</h3>
+          <div class="product-meta">
+            <span>Steel · Automatic</span>
+            <strong>₱24,800</strong>
+          </div>
+          <button class="add-cart" data-name="Core 05" data-price="24800">Add to bag</button>
+        </div>
+      </article>
+
+
+      <article class="product">
+        <div class="product-image">
+          <div class="product-watch">
+            <div class="watch-strap" style="background:#9b6d49"></div>
+            <div class="watch-case">
+              <div class="watch-face" style="background:#d8c7a8">
+                <div class="hand hour" style="background:#292929"></div>
+                <div class="hand minute" style="background:#292929"></div>
+                <div class="dot"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="product-content">
+          <h3>Terra 06</h3>
+          <div class="product-meta">
+            <span>Leather · Automatic</span>
+            <strong>₱21,500</strong>
+          </div>
+          <button class="add-cart" data-name="Terra 06" data-price="21500">Add to bag</button>
+        </div>
+      </article>
+
+
+      <article class="product">
+        <div class="product-image">
+          <div class="product-watch">
+            <div class="watch-strap" style="background:#d0d0ca"></div>
+            <div class="watch-case">
+              <div class="watch-face" style="background:#fafafa">
+                <div class="hand hour" style="background:#222"></div>
+                <div class="hand minute" style="background:#222"></div>
+                <div class="dot"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="product-content">
+          <h3>Pure 07</h3>
+          <div class="product-meta">
+            <span>Steel · Quartz</span>
+            <strong>₱12,800</strong>
+          </div>
+          <button class="add-cart" data-name="Pure 07" data-price="12800">Add to bag</button>
+        </div>
+      </article>
+
+
+      <article class="product">
+        <div class="product-image">
+          <div class="product-watch">
+            <div class="watch-strap" style="background:#202020"></div>
+            <div class="watch-case">
+              <div class="watch-face" style="background:#8b897f">
+                <div class="hand hour" style="background:#111"></div>
+                <div class="hand minute" style="background:#111"></div>
+                <div class="dot"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="product-content">
+          <h3>Slate 08</h3>
+          <div class="product-meta">
+            <span>Steel · Automatic</span>
+            <strong>₱26,900</strong>
+          </div>
+          <button class="add-cart" data-name="Slate 08" data-price="26900">Add to bag</button>
+        </div>
+      </article>
+
+
+      <article class="product">
+        <div class="product-image">
+          <div class="product-watch">
+            <div class="watch-strap" style="background:#5d4536"></div>
+            <div class="watch-case">
+              <div class="watch-face" style="background:#20201f">
+                <div class="hand hour"></div>
+                <div class="hand minute"></div>
+                <div class="dot"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="product-content">
+          <h3>Classic 09</h3>
+          <div class="product-meta">
+            <span>Leather · Automatic</span>
+            <strong>₱28,500</strong>
+          </div>
+          <button class="add-cart" data-name="Classic 09" data-price="28500">Add to bag</button>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- ABOUT -->
+  <section class="container section" id="about">
+    <div class="about">
+
+      <div class="about-image">F</div>
+
+      <div class="about-copy">
+        <div class="label">The idea</div>
+        <h2>Good design doesn't need to shout.</h2>
+
+        <p>
+          FORME is a fictional watch brand created as a
+          portfolio e-commerce concept.
+        </p>
+
+        <p>
+          The interface intentionally uses whitespace,
+          restrained typography, and a small product
+          selection to create a premium shopping experience.
+        </p>
+
+        <a href="#service" class="btn">Our standard</a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- FEATURES -->
+  <section class="container section" id="service">
+
+    <div class="label">Service</div>
+
+    <div class="feature-grid">
+
+      <div class="feature">
+        <strong>2-Year Warranty</strong>
+        <span>Coverage for manufacturing defects.</span>
+      </div>
+
+      <div class="feature">
+        <strong>Free Delivery</strong>
+        <span>Complimentary shipping on orders over ₱10,000.</span>
+      </div>
+
+      <div class="feature">
+        <strong>30-Day Returns</strong>
+        <span>Simple returns when the watch isn't right for you.</span>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+
+<footer>
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <div>
+        <div class="logo">FORME</div>
+        <p>
+          Minimal timepieces for everyday life.
+        </p>
+      </div>
+
+      <div>
+        <h4>Shop</h4>
+        <p><a href="#watches">Collection</a></p>
+        <p><a href="#watches">New arrivals</a></p>
+      </div>
+
+      <div>
+        <h4>Company</h4>
+        <p><a href="#about">Our story</a></p>
+        <p><a href="#service">Warranty</a></p>
+      </div>
+
+    </div>
+
+    <div class="copyright">
+      © 2026 FORME — Portfolio concept.
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- CART MODAL -->
+<div class="modal" id="cartModal">
+
+  <div class="cart">
+
+    <button class="close" id="closeCart">×</button>
+
+    <div class="label">Your selection</div>
+    <h2>Shopping bag</h2>
+
+    <div id="cartItems">
+      <div class="empty">Your bag is empty.</div>
+    </div>
+
+    <div class="cart-total">
+      <span>Total</span>
+      <span id="cartTotal">₱0</span>
+    </div>
+
+    <button class="btn" style="width:100%" onclick="alert('Demo checkout — connect your payment gateway here.')">
+      Checkout
+    </button>
+
+  </div>
+</div>
+
+
+<script>
+const cart = [];
+
+const cartModal = document.getElementById("cartModal");
+const cartItems = document.getElementById("cartItems");
+const cartCount = document.getElementById("cartCount");
+const cartTotal = document.getElementById("cartTotal");
+
+const money = value =>
+  "₱" + value.toLocaleString("en-PH");
+
+function renderCart(){
+
+  cartCount.textContent = cart.length;
+
+  if(cart.length === 0){
+    cartItems.innerHTML =
+      '<div class="empty">Your bag is empty.</div>';
+
+    cartTotal.textContent = "₱0";
+    return;
+  }
+
+  cartItems.innerHTML = cart.map((item,index) => `
+    <div class="cart-item">
+      <span>${item.name}</span>
+
+      <strong>
+        ${money(item.price)}
+        <button onclick="removeItem(${index})">×</button>
+      </strong>
+    </div>
+  `).join("");
+
+  const total = cart.reduce(
+    (sum,item) => sum + item.price,
+    0
+  );
+
+  cartTotal.textContent = money(total);
+}
+
+function removeItem(index){
+  cart.splice(index,1);
+  renderCart();
+}
+
+document.querySelectorAll(".add-cart").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    cart.push({
+      name:button.dataset.name,
+      price:Number(button.dataset.price)
+    });
+
+    renderCart();
+
+    const original = button.textContent;
+
+    button.textContent = "Added ✓";
+
+    setTimeout(() => {
+      button.textContent = original;
+    },1000);
+
+  });
+
+});
+
+document.getElementById("openCart").onclick = () => {
+  cartModal.classList.add("show");
+};
+
+document.getElementById("closeCart").onclick = () => {
+  cartModal.classList.remove("show");
+};
+
+cartModal.addEventListener("click", event => {
+
+  if(event.target === cartModal){
+    cartModal.classList.remove("show");
+  }
+
+});
+</script>
+
+</body>
+</html>
